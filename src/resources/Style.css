@@ -1,0 +1,40 @@
+/*
+    @author Julia Filzinger
+ */
+
+@font-face {
+    src: url('Asap-Bold.ttf');
+}
+
+* {
+    -fx-light-txt: #fff;
+    -fx-dark-txt: #3e3e3e;
+    -fx-bg-blue: #00a0e0;
+    -fx-bg-orange: #f1931a;
+
+    -fx-text-alignment: center;
+
+}
+
+.root{
+    -fx-font-family: "Asap Bold";
+    -fx-font-size: 20px;
+
+}
+
+.root .label{
+    -fx-text-fill: -fx-light-txt;
+
+}
+
+.enterPanel{
+    -fx-background-color: -fx-bg-blue;
+}
+
+.infoPanel{
+    -fx-background-color: -fx-bg-orange;
+}
+
+.welcomeBar .label{
+    -fx-text-fill: -fx-dark-txt;
+}
