@@ -17,6 +17,7 @@ public class StartScreen {
     VBox enterSide = new VBox(20);
     HBox welcomeBar = new HBox(0);
 
+    //TODO put the strings as resource for translation later
     Label welcomeMsg = new Label("Tired from learning? Get some sleep with Snooze!");
     Label infoMsg = new Label("What is this?");
     Label enterMsg = new Label("I have a code, let me sleep!");
