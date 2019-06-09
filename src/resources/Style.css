@@ -9,10 +9,19 @@
 * {
     -fx-light-txt: #fff;
     -fx-dark-txt: #3e3e3e;
-    -fx-bg-blue: #00a0e0;
+    -fx-bg-blue: #1ac1ee;
+    -fx-txt-blue: #00b2ed;
     -fx-bg-orange: #f1931a;
 
-    -fx-text-alignment: center;
+    -fx-paleblue: #85def6;
+    -fx-palegreen: #d6ffb2;
+    -fx-palered: #ffc8cd;
+    -fx-error: #ff2c50;
+    -fx-error2: #ff7e52;
+    -fx-correct: #5cf369;
+
+
+    /*-fx-text-alignment: center;*/
 
 }
 
@@ -24,17 +33,55 @@
 
 .root .label{
     -fx-text-fill: -fx-light-txt;
-
 }
 
-.enterPanel{
+.enterPanel {}
+
+.blueBG{
     -fx-background-color: -fx-bg-blue;
 }
 
-.infoPanel{
-    -fx-background-color: -fx-bg-orange;
+.paleblueBG{
+    -fx-background-color: -fx-paleblue;
 }
 
-.welcomeBar .label{
-    -fx-text-fill: -fx-dark-txt;
+.error2_BG {
+    -fx-background-color: -fx-error2;
 }
+
+.error1_BG {
+    -fx-background-color: -fx-error;
+}
+
+.infoPanel{
+}
+
+.welcomeBar {
+    -fx-background-color: #ffffff;
+}
+
+/* text styles */
+.leftAligned .label{
+    -fx-text-alignment: left;
+}
+
+.blueText .label{
+    -fx-text-fill: -fx-txt-blue;
+}
+
+.h1 {
+    -fx-font-size: 50px;
+}
+.h2 {
+    -fx-font-size: 40px;
+}
+.h3 {
+    -fx-font-size: 30px;
+}
+.h4 {
+    -fx-font-size: 24px;
+}
+.h5 {
+    -fx-font-size: 22px;
+}
+
