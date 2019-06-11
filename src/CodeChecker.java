@@ -2,14 +2,22 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class Logic {
+public class CodeChecker {
 
-    public static void main(String[] args) throws IOException{
-        try {
+    private String capsuleCode;
+
+    public boolean checkValidity(String s) throws IOException {
+        if (s.equals(getCurrentCode())){
+            return true;
+        }
+        return false;
+    }
+
+    public String getCurrentCode() throws IOException{
+/*        try {
 
             URL url = new URL("https://platania.info:3000/api/Capsules/2/bookings?access_token=TCmDmaQGQt76PArgLl6BbAaEsgQvPX3vqwG82Pzq4DXujexKguwnXXwghGgKQVsF");
             //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -38,7 +46,10 @@ public class Logic {
 
         } catch (ProtocolException e) {
             //
-        }
+        }*/
+
+        capsuleCode = "1234";
+        return capsuleCode;
 
     }
 }

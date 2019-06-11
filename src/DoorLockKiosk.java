@@ -1,9 +1,6 @@
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.application.Application;
-import javafx.stage.WindowEvent;
 
 
 public class DoorLockKiosk extends Application implements StageController {
@@ -21,7 +18,7 @@ public class DoorLockKiosk extends Application implements StageController {
     private final Stage window = new Stage();
     private Scene scene;
 
-    Logic logic = new Logic();
+
 
     // TODO react to changed language. Use: overrideGUIInstances(languageSelected);
 

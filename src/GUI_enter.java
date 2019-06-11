@@ -22,6 +22,8 @@ public class GUI_enter extends Stage implements StageControllerPassive {
 
     private Label onOkayMsg = new Label();
 
+    CodeChecker codeChecker = new CodeChecker();
+
     // constructor
     GUI_enter(StageController stc, lang lang){
         languageSelected = lang;
@@ -69,6 +71,18 @@ public class GUI_enter extends Stage implements StageControllerPassive {
             if( s.length() == codeLength ) {
                 onOkayMsg.setText("Verifying ...");
                 onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
+                try{
+                    if (codeChecker.checkValidity(s)){
+                        onOkayMsg.setText("Valid!");
+                        onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
+                        //TODO go to ok screen and open the door
+                    } else {
+                        onOkayMsg.setText("Invalid code, please retry!");
+                        onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));}
+                } catch (Exception t){
+                    System.out.println(t);
+                }
+
                 // TODO on key_ok check code
             } else {
                 onOkayMsg.setText("A "+codeLength+"-digit code is required.");
