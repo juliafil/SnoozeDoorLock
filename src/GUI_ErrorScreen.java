@@ -8,17 +8,19 @@ import javafx.stage.Stage;
 
 // 1024x600 px screen
 
-public class GUI_doorOpen extends Stage implements StageControllerPassive {
+public class GUI_ErrorScreen extends Stage implements StageControllerPassive {
 
     private Scene scene;
     private StageController stageController;
-    lang languageSelected;
+    private lang languageSelected;
 
     //TODO put the strings as resource for translation later
-    private Label msg = new Label("Please close the door!");
+    private Label errorMsg = new Label("Some error occurred.");
+    private Label hint = new Label("Please tell our staff!");
+
 
     // constructor
-    GUI_doorOpen(StageController stc, lang lang){
+    GUI_ErrorScreen(StageController stc, lang lang){
         languageSelected = lang;
         stageController = stc;
         makeLayout();
@@ -29,24 +31,26 @@ public class GUI_doorOpen extends Stage implements StageControllerPassive {
         VBox main = new VBox(20);
         Insets paddingStd = new Insets(20,20,20,20);
 
-        main.getChildren().add(msg);
+        main.getChildren().addAll(errorMsg, hint);
         main.setPadding(paddingStd);
-        main.getStyleClass().addAll("error2_BG");
+        main.getStyleClass().add("error1_BG");
         main.setAlignment(Pos.CENTER);
 
-        msg.setAlignment(Pos.CENTER);
-        msg.getStyleClass().addAll("h1");
+        errorMsg.setAlignment(Pos.CENTER);
+        errorMsg.getStyleClass().addAll("h1");
+        hint.setAlignment(Pos.CENTER);
+        hint.getStyleClass().addAll("h4");
 
         layout.setCenter(main);
 
         scene = new Scene(layout);
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
+        this.setScene(scene);
     }
 
+
     @Override
-    public Scene getMyScene() {return scene;}
-
-
-
-
+    public Scene getMyScene() {
+        return scene;
+    }
 }

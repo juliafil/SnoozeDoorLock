@@ -10,12 +10,9 @@ import javafx.stage.Stage;
 
 public class GUI_wrongCode extends Stage implements StageControllerPassive {
 
-    private BorderPane layout = new BorderPane();
-    private VBox main = new VBox(20);
-    private Insets paddingStd = new Insets(20,20,20,20);
-
     private StageController stageController;
     private Scene scene;
+    private lang languageSelected;
 
     //TODO put the strings as resource for translation later
     private Label msg = new Label("Wrong code.");
@@ -23,12 +20,17 @@ public class GUI_wrongCode extends Stage implements StageControllerPassive {
     private Label hint = new Label("You can find the code under \"bookings\" in your Snooze app.");
 
     // constructor
-    GUI_wrongCode(StageController stc){
+    GUI_wrongCode(StageController stc, lang lang){
+        languageSelected = lang;
         stageController = stc;
         makeLayout();
     }
 
     private void makeLayout(){
+        BorderPane layout = new BorderPane();
+        VBox main = new VBox(20);
+        Insets paddingStd = new Insets(20,20,20,20);
+
         msg2.getStyleClass().addAll("h2");
         hint.getStyleClass().addAll("h4");
         msg.getStyleClass().addAll("h1");

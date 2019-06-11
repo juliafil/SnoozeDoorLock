@@ -13,6 +13,8 @@
     -fx-txt-blue: #00b2ed;
     -fx-bg-orange: #f1931a;
 
+    -fx-buttons: #bfe5f5;
+
     -fx-paleblue: #85def6;
     -fx-palegreen: #d6ffb2;
     -fx-palered: #ffc8cd;
@@ -28,11 +30,34 @@
 .root{
     -fx-font-family: "Asap Bold";
     -fx-font-size: 20px;
-
 }
 
 .root .label{
     -fx-text-fill: -fx-light-txt;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: -fx-buttons;
+    -fx-text-fill: -fx-txt-blue;
+    -fx-background-radius: 0;
+}
+
+.keypad_button {
+    -fx-background-radius: 5px;
+}
+
+.up_button {
+    -fx-background-image: url("up_arrow.png");
+    -fx-background-size: contain;
+}
+.down_button {
+    -fx-background-image: url("down_arrow.png");
+    -fx-background-size: contain;
+}
+.back_button {
+    -fx-background-image: url("left_arrow.png");
+    -fx-background-size: contain;
 }
 
 .enterPanel {}
@@ -60,9 +85,19 @@
     -fx-background-color: #ffffff;
 }
 
+.scroll-pane > .viewport,
+.scroll-pane{
+    -fx-background-color: transparent;
+}
+
+
 /* text styles */
 .leftAligned .label{
     -fx-text-alignment: left;
+}
+
+.whiteText .label{
+    -fx-text-fill: -fx-light-text;
 }
 
 .blueText .label{

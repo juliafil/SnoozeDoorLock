@@ -10,13 +10,9 @@ import javafx.stage.Stage;
 
 public class GUI_inUse extends Stage implements StageControllerPassive {
 
-    private BorderPane layout = new BorderPane();
-    private VBox main = new VBox(20);
-    private VBox infoBar = new VBox(20);
-    private Insets paddingStd = new Insets(20,20,20,20);
-
     private Scene scene;
     private StageController stageController;
+    private lang languageSelected;
 
     //TODO put the strings as resource for translation later
     private Label inUseMsg = new Label("This capsule is currently in use.");
@@ -24,12 +20,18 @@ public class GUI_inUse extends Stage implements StageControllerPassive {
 
 
     // constructor
-    GUI_inUse(StageController stc){
+    GUI_inUse(StageController stc, lang lang){
+        languageSelected = lang;
         stageController = stc;
         makeLayout();
     }
 
     private void makeLayout(){
+        BorderPane layout = new BorderPane();
+        VBox main = new VBox(20);
+        VBox infoBar = new VBox(20);
+        Insets paddingStd = new Insets(20,20,20,20);
+
         main.getChildren().add(inUseMsg);
         main.setPadding(paddingStd);
         main.getStyleClass().add("blueBG");

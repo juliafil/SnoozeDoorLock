@@ -1,24 +1,29 @@
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.application.Application;
+import javafx.stage.WindowEvent;
 
 
 public class DoorLockKiosk extends Application implements StageController {
 
-    // instantiate all GUI classes
-    private final GUI_start startStage = new GUI_start(this);
-    private final GUI_inUse inUseStage = new GUI_inUse(this);
-    private final GUI_doorOpen doorOpenStage = new GUI_doorOpen(this);
-    private final GUI_wrongCode wrongCodeStage = new GUI_wrongCode(this);
-    private final GUI_info infoStage = new GUI_info(this);
-    private final GUI_enter enterStage = new GUI_enter(this);
+    lang languageSelected = Language.getInstance().getSelectedLanguage();
+
+    private GUI_start startStage = new GUI_start(this, languageSelected);
+    private GUI_inUse inUseStage = new GUI_inUse(this, languageSelected);
+    private GUI_doorOpen doorOpenStage = new GUI_doorOpen(this, languageSelected);
+    private GUI_wrongCode wrongCodeStage = new GUI_wrongCode(this, languageSelected);
+    private GUI_info infoStage = new GUI_info(this, languageSelected);
+    private GUI_enter enterStage = new GUI_enter(this, languageSelected);
+    private GUI_ErrorScreen errorStage = new GUI_ErrorScreen(this, languageSelected);
 
     private final Stage window = new Stage();
     private Scene scene;
 
     Logic logic = new Logic();
 
-    // TODO make enum for switch screens (see switch case in @Override start() )
+    // TODO react to changed language. Use: overrideGUIInstances(languageSelected);
 
     public static void main(String[] args) {
         launch(args);
@@ -26,7 +31,18 @@ public class DoorLockKiosk extends Application implements StageController {
 
     @Override
     public void start(Stage primaryStage) {
-        goTo("home");
+        // make fullscreen and unclosable! TODO uncomment!
+        /*
+        window.setFullScreen(true);
+        window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        window.setOnCloseRequest( e -> e.consume() );
+        */
+
+        if( CapsuleStateManager.getInstance().getState() == CapsuleState.FREE ) {
+            goTo("home");
+        } else {
+            goTo( CapsuleStateManager.getInstance().getState().getString() );
+        }
     }
 
     @Override
@@ -63,6 +79,11 @@ public class DoorLockKiosk extends Application implements StageController {
                 scene = enterStage.getMyScene();
                 break;
 
+            case "error":
+            default:
+                scene = errorStage.getMyScene();
+                break;
+
         }
         window.setTitle("DoorLockKiosk");
         setWindowSize(window);
@@ -73,5 +94,15 @@ public class DoorLockKiosk extends Application implements StageController {
     private void setWindowSize(Stage window) {
         window.setWidth(1024);
         window.setHeight(600);
+    }
+
+    private void overrideGUIInstances(lang lang){
+        GUI_start startStage = new GUI_start(this, lang);
+        GUI_inUse inUseStage = new GUI_inUse(this, lang);
+        GUI_doorOpen doorOpenStage = new GUI_doorOpen(this, lang);
+        GUI_wrongCode wrongCodeStage = new GUI_wrongCode(this, lang);
+        GUI_info infoStage = new GUI_info(this, lang);
+        GUI_enter enterStage = new GUI_enter(this, lang);
+        GUI_ErrorScreen errorStage = new GUI_ErrorScreen(this, lang);
     }
 }

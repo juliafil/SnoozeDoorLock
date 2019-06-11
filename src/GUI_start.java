@@ -11,13 +11,8 @@ import javafx.stage.Stage;
 public class GUI_start extends Stage implements StageControllerPassive {
 
     private StageController stageController;
-
     private Scene scene;
-
-    private BorderPane layout = new BorderPane();
-    private VBox infoSide = new VBox(20);
-    private VBox enterSide = new VBox(20);
-    private HBox welcomeBar = new HBox(0);
+    private lang languageSelected;
 
 
     //TODO put the strings as resource for translation later
@@ -29,12 +24,18 @@ public class GUI_start extends Stage implements StageControllerPassive {
 
 
     // constructor
-    GUI_start(StageController stc){
+    GUI_start(StageController stc, lang lang){
+        languageSelected = lang;
         stageController = stc;
         makeLayout();
     }
 
     private void makeLayout(){
+        BorderPane layout = new BorderPane();
+        VBox infoSide = new VBox(20);
+        VBox enterSide = new VBox(20);
+        HBox welcomeBar = new HBox(0);
+
         welcomeBar.getChildren().add(welcomeMsg);
         welcomeBar.setPadding(paddingStd);
         welcomeBar.getStyleClass().addAll("welcomeBar", "blueText");
