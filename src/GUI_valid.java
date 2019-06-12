@@ -6,6 +6,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.concurrent.TimeUnit;
+
 
 // 1024x600 px screen
 
@@ -53,6 +55,7 @@ public class GUI_valid extends Stage implements StageControllerPassive{
             scene = new Scene(layout);
             scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
             this.setScene(scene);
+
         }
 
 
