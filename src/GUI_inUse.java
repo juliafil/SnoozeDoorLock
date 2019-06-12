@@ -34,11 +34,11 @@ public class GUI_inUse extends Stage implements StageControllerPassive {
 
         main.getChildren().add(inUseMsg);
         main.setPadding(paddingStd);
-        main.getStyleClass().add("blueBG");
+        main.getStyleClass().add("bg_brand");
 
         infoBar.getChildren().add(helpMsg);
         infoBar.setPadding(paddingStd);
-        infoBar.getStyleClass().addAll("paleblueBG");
+        infoBar.getStyleClass().addAll("bg_brand_light");
 
         inUseMsg.setAlignment(Pos.CENTER);
         inUseMsg.getStyleClass().addAll("h1");

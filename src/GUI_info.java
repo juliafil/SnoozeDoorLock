@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
@@ -21,7 +22,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
     private lang languageSelected;
     private Scene scene;
 
-    private final int scrollIncrement = 20;
+    private final int scrollIncrement = 10;
 
     // constructor
     GUI_info(StageController stc, lang lang){
@@ -40,12 +41,25 @@ public class GUI_info extends Stage implements StageControllerPassive {
         Button backBtn = new Button();
         Button downBtn = new Button();
         Button upBtn = new Button();
+        VBox scrollableContent = new VBox(20);
+
+        ImageView logo = new ImageView("resources/logo_white_medium.png");
+        logo.setSmooth(true);
+        logo.setCache(true);
+        logo.setPreserveRatio(true);
+        logo.setFitHeight( 100 );
+        HBox logoWrapper = new HBox(0);
+        logoWrapper.getChildren().add(logo);
+        logoWrapper.setAlignment(Pos.CENTER);
+        logoWrapper.setPrefHeight(100);
+
+        //logoWrapper.setBackground(new Background(new BackgroundFill(Paint.valueOf("#fff"), null, null)));
 
         //TODO put the strings as resource for translation later
         Text txt = new Text("Snooze ist Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. Snooze ist Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla. Snooze ist Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.");
         Label headline = new Label("The Snooze Project");
 
-        ScrollPane scroller = new ScrollPane(txt);
+        Pane txtWrapper = new Pane(txt);
 
         // make Buttons squares
         Button[] btns = {backBtn, downBtn, upBtn};
@@ -56,10 +70,12 @@ public class GUI_info extends Stage implements StageControllerPassive {
         upBtn.getStyleClass().addAll("up_button");
         downBtn.getStyleClass().addAll("down_button");
         backBtn.getStyleClass().addAll("back_button");
-        //upBtn.setBorder( new Border( new BorderStroke(Paint.valueOf("#1ac1ee"), BorderStrokeStyle.SOLID, null, new BorderWidths(0, 0, 3, 0))));
 
         // assemble components
-        main.getChildren().addAll(headline, scroller);
+        headline.setPadding(new Insets(0, 0, 20, 0));
+        scrollableContent.getChildren().addAll(logoWrapper, headline, txtWrapper);
+        ScrollPane scroller = new ScrollPane(scrollableContent);
+        main.getChildren().addAll(scroller);
         main.setPadding(new Insets(20, 60, 20, 60));
 
         controls_back.getChildren().addAll(backBtn);
@@ -69,6 +85,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
         scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroller.getStyleClass().addAll("scroller");
+
         txt.wrappingWidthProperty().bind(scroller.widthProperty());
         txt.getStyleClass().addAll("h4", "leftAligned");
         txt.setLineSpacing(2.5);
@@ -82,7 +99,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
         layout.setCenter(main);
         layout.setLeft(controls_back);
         layout.setRight(controls_scroll);
-        layout.getStyleClass().addAll("blueBG");
+        layout.getStyleClass().addAll("bg_brand_humble");
 
         scene = new Scene(layout);
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());

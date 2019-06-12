@@ -36,11 +36,11 @@ public class GUI_valid extends Stage implements StageControllerPassive{
 
             main.getChildren().add(validMsg);
             main.setPadding(paddingStd);
-            main.getStyleClass().add("blueBG");
+            main.getStyleClass().add("bg_brand");
 
             infoBar.getChildren().add(helpMsg);
             infoBar.setPadding(paddingStd);
-            infoBar.getStyleClass().addAll("paleblueBG");
+            infoBar.getStyleClass().addAll("bg_brand_light");
 
             validMsg.setAlignment(Pos.CENTER);
             validMsg.getStyleClass().addAll("h1");

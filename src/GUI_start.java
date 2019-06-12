@@ -2,6 +2,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -36,15 +37,22 @@ public class GUI_start extends Stage implements StageControllerPassive {
         VBox enterSide = new VBox(20);
         HBox welcomeBar = new HBox(0);
 
-        welcomeBar.getChildren().add(welcomeMsg);
+        //ImageView logo = new ImageView("resources/logo_alternative_noclaim_small.png");
+        ImageView logo = new ImageView("resources/logo_nosub_small.png");
+        logo.setSmooth(true);
+        logo.setCache(true);
+        logo.setPreserveRatio(true);
+        logo.setFitHeight( 60 );
+
+        welcomeBar.getChildren().addAll(logo, welcomeMsg);
         welcomeBar.setPadding(paddingStd);
-        welcomeBar.getStyleClass().addAll("welcomeBar", "blueText");
+        welcomeBar.getStyleClass().addAll("welcomeBar", "text_brand");
         welcomeBar.setAlignment(Pos.CENTER);
         welcomeMsg.setAlignment(Pos.CENTER);
-        welcomeMsg.getStyleClass().addAll("blueText", "h5");
+        welcomeMsg.getStyleClass().addAll( "h5");
 
         infoSide.getChildren().add(infoMsg);
-        infoSide.getStyleClass().addAll("infoPanel", "paleblueBG");
+        infoSide.getStyleClass().addAll("infoPanel", "bg_brand_light");
         infoSide.setPadding(paddingStd);
         infoSide.setAlignment(Pos.CENTER);
         infoSide.setPrefWidth(350);
@@ -52,7 +60,7 @@ public class GUI_start extends Stage implements StageControllerPassive {
         infoMsg.getStyleClass().addAll("h2");
 
         enterSide.getChildren().add(enterMsg);
-        enterSide.getStyleClass().addAll("enterPanel", "blueBG");
+        enterSide.getStyleClass().addAll("enterPanel", "bg_brand");
         enterSide.setPadding(paddingStd);
         enterSide.setAlignment(Pos.CENTER);
         enterMsg.setAlignment(Pos.CENTER);

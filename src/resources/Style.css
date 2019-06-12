@@ -7,23 +7,29 @@
 }
 
 * {
-    -fx-light-txt: #fff;
-    -fx-dark-txt: #3e3e3e;
-    -fx-bg-blue: #1ac1ee;
-    -fx-txt-blue: #00b2ed;
-    -fx-bg-orange: #f1931a;
+    -fx-neutral-light-txt: #fff;
+    -fx-neutral-dark-txt: #3e3e3e;
+    -fx-brand-bg: #1ac1ee;
+    -fx-brand-txt: #00b2ed;
+    -fx-brand-light: #85def6;
+    /*-fx-buttons: #bfe5f5;*/
+    -fx-buttons: rgba(255, 255, 255, 0.6);
+    -fx-brand-gradient: linear-gradient(to bottom right, reflect, #00b2ed, #85def6, #00b2ed);
+    -fx-brand-gradient-2: linear-gradient(to bottom right, reflect, #00b2ed, #1ac1ee, #00b2ed);
+    -fx-brand-light-gradient: linear-gradient(to bottom right, reflect, #bfe5f5, #85def6, #bfe5f5);
 
-    -fx-buttons: #bfe5f5;
+    /* brandcolor green try
+    -fx-brand-bg: #33cc66;
+    -fx-brand-txt: #33b55b;
+    -fx-brand-light: #69e28e;
+    -fx-buttons: #b1fcc3;
+    */
 
-    -fx-paleblue: #85def6;
     -fx-palegreen: #d6ffb2;
     -fx-palered: #ffc8cd;
     -fx-error: #ff2c50;
     -fx-error2: #ff7e52;
     -fx-correct: #5cf369;
-
-
-    /*-fx-text-alignment: center;*/
 
 }
 
@@ -33,13 +39,13 @@
 }
 
 .root .label{
-    -fx-text-fill: -fx-light-txt;
+    -fx-text-fill: -fx-neutral-light-txt;
 }
 
 /* Buttons */
 .button {
     -fx-background-color: -fx-buttons;
-    -fx-text-fill: -fx-txt-blue;
+    -fx-text-fill: -fx-brand-txt;
     -fx-background-radius: 0;
 }
 
@@ -59,15 +65,17 @@
     -fx-background-image: url("left_arrow.png");
     -fx-background-size: contain;
 }
-
-.enterPanel {}
-
-.blueBG{
-    -fx-background-color: -fx-bg-blue;
+.bg_brand{
+    /*-fx-background-color: -fx-brand-bg;*/
+    -fx-background-color: -fx-brand-gradient;
+}
+.bg_brand_humble{
+    -fx-background-color: -fx-brand-gradient-2;
 }
 
-.paleblueBG{
-    -fx-background-color: -fx-paleblue;
+.bg_brand_light{
+    /*-fx-background-color: -fx-brand-light;*/
+    -fx-background-color: -fx-brand-light-gradient;
 }
 
 .error2_BG {
@@ -77,10 +85,6 @@
 .error1_BG {
     -fx-background-color: -fx-error;
 }
-
-.infoPanel{
-}
-
 .welcomeBar {
     -fx-background-color: #ffffff;
 }
@@ -88,6 +92,9 @@
 .scroll-pane > .viewport,
 .scroll-pane{
     -fx-background-color: transparent;
+}
+.text-field{
+    -fx-text-fill: -fx-brand-txt;
 }
 
 
@@ -100,8 +107,8 @@
     -fx-text-fill: -fx-light-text;
 }
 
-.blueText .label{
-    -fx-text-fill: -fx-txt-blue;
+.text_brand .label{
+    -fx-text-fill: -fx-brand-txt;
 }
 
 .h1 {

@@ -196,7 +196,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         layout.setCenter(main);
         layout.setLeft(controls_back);
         layout.setRight(refine);
-        layout.getStyleClass().addAll("blueBG");
+        layout.getStyleClass().addAll("bg_brand");
 
         scene = new Scene(layout);
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
