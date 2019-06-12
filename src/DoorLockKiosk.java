@@ -36,11 +36,18 @@ public class DoorLockKiosk extends Application implements StageController {
         window.setOnCloseRequest( e -> e.consume() );
         */
 
-        if( CapsuleStateManager.getInstance().getState() == CapsuleState.FREE ) {
-            goTo("home");
-        } else {
-            goTo( CapsuleStateManager.getInstance().getState().getString() );
-        }
+            if (CapsuleStateManager.getInstance().getState() == CapsuleState.FREE) {
+                goTo("home");
+            } else {
+                goTo(CapsuleStateManager.getInstance().getState().getString());
+            }
+
+            //checkState();
+
+    }
+
+    public void checkState(){
+        goTo(CapsuleStateManager.getInstance().getState().getString());
     }
 
     @Override

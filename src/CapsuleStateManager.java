@@ -15,7 +15,7 @@ class CapsuleStateManager {
 
     CapsuleState getState() { return state; }
 
-    void setState(CapsuleState newState) {
+    public void setState(CapsuleState newState) {
         state = newState;
     }
 }

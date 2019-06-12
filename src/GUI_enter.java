@@ -9,6 +9,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.concurrent.TimeUnit;
+
 
 // 1024x600 px screen
 
@@ -72,20 +74,14 @@ public class GUI_enter extends Stage implements StageControllerPassive {
             if( s.length() == codeLength ) {
                 onOkayMsg.setText("Verifying ...");
                 onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
-                try{
-                    if (codeChecker.checkValidity(s)){
-                        onOkayMsg.setText("Valid!");
-                        onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
-                        //TODO go to ok screen and open the door
-                        stageController.goTo("valid");
-                    } else {
-                        onOkayMsg.setText("Invalid code, please retry!");
-                        onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));}
-                } catch (Exception t){
-                    System.out.println(t);
-                }
+                if (codeChecker.checkValidity(s)){
+                    //TODO go to ok screen and open the door
+                    stageController.goTo("valid");
+                    CapsuleStateManager.getInstance().setState(CapsuleState.IN_USE);
+                } else {
+                    onOkayMsg.setText("Invalid code, please retry!");
+                    onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));}
 
-                // TODO on key_ok check code
             } else {
                 onOkayMsg.setText("A "+codeLength+"-digit code is required.");
                 onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));
