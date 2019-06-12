@@ -1,4 +1,7 @@
+import org.json.JSONObject;
+
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,19 +12,16 @@ public class CodeChecker {
 
     private String capsuleCode;
 
-    public boolean checkValidity(String s) throws IOException {
-        if (s.equals(getCurrentCode())){
-            return true;
-        }
-        return false;
+    public boolean checkValidity(String s) {
+        return s.equals(getCurrentCode());
     }
 
-    public String getCurrentCode() throws IOException{
-/*        try {
-
-            URL url = new URL("https://platania.info:3000/api/Capsules/2/bookings?access_token=TCmDmaQGQt76PArgLl6BbAaEsgQvPX3vqwG82Pzq4DXujexKguwnXXwghGgKQVsF");
-            //HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    public String getCurrentCode(){
+        try {
+            URL url = new URL("https://platania.info:3000/api/Capsules/2/bookings?access_token=GN0tME3nUBa6auETCDju80cAzMSMDaDY791UafudXydp6AwwLfVjEJDDxJTjHEg3");
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            conn.setSSLSocketFactory(socketFactory);
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
 
@@ -31,24 +31,25 @@ public class CodeChecker {
             }
 
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    (conn.getInputStream())));
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (conn.getInputStream())));
 
-            String output;
-            System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
-            }
+                String line;
+                StringBuilder responseStrBuilder = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    responseStrBuilder.append(line);
+                }
 
-            conn.disconnect();
+                JSONObject result = new JSONObject(responseStrBuilder.toString().replaceAll("[\\[\\]]", ""));
+                int pin = result.getInt("Pin");
+                capsuleCode = String.valueOf(pin);
+                System.out.println(capsuleCode);
+                conn.disconnect();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-
-        } catch (ProtocolException e) {
-            //
-        }*/
-
-        capsuleCode = "1234";
         return capsuleCode;
 
     }

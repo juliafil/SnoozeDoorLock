@@ -18,7 +18,8 @@ public class GUI_enter extends Stage implements StageControllerPassive {
     private StageController stageController;
     private lang languageSelected;
 
-    private int codeLength = 4;
+    //TODO change back to 4, for testing the first PIN got from the website is length 3
+    private int codeLength = 3;
 
     private Label onOkayMsg = new Label();
 
