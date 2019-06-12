@@ -77,6 +77,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                         onOkayMsg.setText("Valid!");
                         onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
                         //TODO go to ok screen and open the door
+                        stageController.goTo("valid");
                     } else {
                         onOkayMsg.setText("Invalid code, please retry!");
                         onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));}

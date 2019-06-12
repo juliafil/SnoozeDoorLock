@@ -14,6 +14,7 @@ public class DoorLockKiosk extends Application implements StageController {
     private GUI_info infoStage = new GUI_info(this, languageSelected);
     private GUI_enter enterStage = new GUI_enter(this, languageSelected);
     private GUI_ErrorScreen errorStage = new GUI_ErrorScreen(this, languageSelected);
+    private GUI_valid validStage = new GUI_valid(this, languageSelected);
 
     private final Stage window = new Stage();
     private Scene scene;
@@ -75,7 +76,9 @@ public class DoorLockKiosk extends Application implements StageController {
             case "enter":
                 scene = enterStage.getMyScene();
                 break;
-
+            case "valid":
+                scene = validStage.getMyScene();
+                break;
             case "error":
             default:
                 scene = errorStage.getMyScene();
@@ -101,5 +104,6 @@ public class DoorLockKiosk extends Application implements StageController {
         GUI_info infoStage = new GUI_info(this, lang);
         GUI_enter enterStage = new GUI_enter(this, lang);
         GUI_ErrorScreen errorStage = new GUI_ErrorScreen(this, lang);
+        GUI_valid validStage = new GUI_valid(this, lang);
     }
 }

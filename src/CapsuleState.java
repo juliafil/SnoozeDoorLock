@@ -14,4 +14,5 @@ public enum CapsuleState
         public String getString() {
             return stateString;
         }
+
     }
