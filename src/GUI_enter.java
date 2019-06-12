@@ -23,7 +23,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
 
     private Label onOkayMsg = new Label();
 
-    CodeChecker codeChecker = new CodeChecker();
+    private CodeChecker codeChecker = new CodeChecker();
 
     // constructor
     GUI_enter(StageController stc, lang lang){
@@ -205,7 +205,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         backBtn.setOnAction( e -> stageController.goHome());
     }
 
-    public static void addTextLimiter(final TextField tf, final int maxLength) {
+    private static void addTextLimiter(final TextField tf, final int maxLength) {
         tf.textProperty().addListener( e -> {
                 if (tf.getText().length() > maxLength) {
                     String s = tf.getText().substring(0, maxLength);

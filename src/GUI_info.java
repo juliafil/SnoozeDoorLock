@@ -88,9 +88,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
         this.setScene(scene);
 
-        backBtn.setOnAction( e -> {
-            stageController.goHome();
-        });
+        backBtn.setOnAction( e -> stageController.goHome());
 
         // scroll buttons functionality
         upBtn.setOnAction( e -> {
