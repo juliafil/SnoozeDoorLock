@@ -9,8 +9,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.util.concurrent.TimeUnit;
-
 
 // 1024x600 px screen
 
@@ -77,7 +75,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                 if (codeChecker.checkValidity(s)){
                     //TODO go to ok screen and open the door
                     stageController.goTo("valid");
-                    CapsuleStateManager.getInstance().setState(CapsuleState.IN_USE);
+                    CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);
                 } else {
                     onOkayMsg.setText("Invalid code, please retry!");
                     onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));}
