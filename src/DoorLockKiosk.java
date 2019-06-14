@@ -1,9 +1,10 @@
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.application.Application;
 
 
-public class DoorLockKiosk extends Application implements StageController {
+public class DoorLockKiosk extends Application implements StageController, config {
 
     lang languageSelected = Language.getInstance().getSelectedLanguage();
 
@@ -18,7 +19,6 @@ public class DoorLockKiosk extends Application implements StageController {
 
     private final Stage window = new Stage();
     private Scene scene;
-
 
 
     // TODO react to changed language. Use: overrideGUIInstances(languageSelected);
@@ -36,17 +36,24 @@ public class DoorLockKiosk extends Application implements StageController {
         window.setOnCloseRequest( e -> e.consume() );
         */
 
-            if (CapsuleStateContainer.getInstance().getState() == CapsuleState.FREE) {
-                goTo("home");
-            } else {
-                goTo(CapsuleStateContainer.getInstance().getState().getString());
-            }
+        if (CapsuleStateContainer.getInstance().getState() == CapsuleState.FREE) {
+            goTo("home");
+        } else {
+            goTo(CapsuleStateContainer.getInstance().getState().getString());
+        }
 
-            //checkState();
+        //Initilaise and start Task for executing Script and add a Listener to Message Property
+        ScriptHandler testHandler = new ScriptHandler(this, scriptPath, pythonPath);
+        new Thread(testHandler).start();
+        testHandler.messageProperty().addListener((obs, oldMsg, newMsg) -> {
+            if (newMsg.equals("true")) {
+                goTo("doorOpen");
+            }
+        });
 
     }
 
-    public void checkState(){
+    public void checkState() {
         goTo(CapsuleStateContainer.getInstance().getState().getString());
     }
 
@@ -58,7 +65,7 @@ public class DoorLockKiosk extends Application implements StageController {
     @Override
     public void goTo(String targetScene) {
 
-        switch (targetScene){
+        switch (targetScene) {
 
             case "home":
                 scene = startStage.getMyScene();
@@ -101,9 +108,10 @@ public class DoorLockKiosk extends Application implements StageController {
     private void setWindowSize(Stage window) {
         window.setWidth(1024);
         window.setHeight(600);
+
     }
 
-    private void overrideGUIInstances(lang lang){
+    private void overrideGUIInstances(lang lang) {
         GUI_start startStage = new GUI_start(this, lang);
         GUI_inUse inUseStage = new GUI_inUse(this, lang);
         GUI_doorOpen doorOpenStage = new GUI_doorOpen(this, lang);
