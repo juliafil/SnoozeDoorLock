@@ -2,6 +2,10 @@ import javafx.concurrent.Task;
 import java.io.*;
 import java.util.Arrays;
 
+/**
+ @author Ertel
+ ScriptHandler executes the python scripts in a seperate Task
+ **/
 
 public class ScriptHandler extends Task<Boolean> {
 

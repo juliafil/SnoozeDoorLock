@@ -43,12 +43,15 @@ public class DoorLockKiosk extends Application implements StageController, confi
         }
 
 
-        //Initilaise and start Task for executing Script and add a Listener to Message Property
-        ScriptHandler testHandler = new ScriptHandler(this, scriptPath, pythonPath);
+        /**Initilaise and start Task for executing Script and add a Listener to Message Property
+         * @author Ertel
+         */
+        ScriptHandler testHandler = new ScriptHandler(this, config.scriptPath, config.pythonPath);
         new Thread(testHandler).start();
         testHandler.messageProperty().addListener((obs, oldMsg, newMsg) -> {
-            if (newMsg.equals("true")) {
-                goTo("doorOpen");
+            if (newMsg.equals("doorOpen")) {
+                System.out.println("change #state to Open");
+                CapsuleStateContainer.getInstance().setState(CapsuleState.DOOR_OPEN);
             }
         });
 
