@@ -1,3 +1,9 @@
+/**
+ * @author Julia
+ * bitte kommentar schreiben
+ */
+
+
 public enum CapsuleState
     {
         FREE("free"),

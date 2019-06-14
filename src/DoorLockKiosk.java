@@ -42,6 +42,7 @@ public class DoorLockKiosk extends Application implements StageController, confi
             goTo(CapsuleStateContainer.getInstance().getState().getString());
         }
 
+
         //Initilaise and start Task for executing Script and add a Listener to Message Property
         ScriptHandler testHandler = new ScriptHandler(this, scriptPath, pythonPath);
         new Thread(testHandler).start();
@@ -53,6 +54,11 @@ public class DoorLockKiosk extends Application implements StageController, confi
 
     }
 
+    /**
+     * @author Edouard
+     * call this function if the state of the door changed and you want to go to corresponding screeen
+     */
+    @Override
     public void checkState() {
         goTo(CapsuleStateContainer.getInstance().getState().getString());
     }

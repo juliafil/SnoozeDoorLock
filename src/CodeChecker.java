@@ -8,14 +8,29 @@ import java.io.InputStreamReader;
 import java.net.ProtocolException;
 import java.net.URL;
 
+
+/**
+ * @author Edouard
+ * Class that connects to the API via SSL and gets the PIN code from the actual booking
+ * If no booking, empty JSON is received. TODO handle an empty booking
+ */
 public class CodeChecker {
 
     private String capsuleCode;
 
+    /**
+     * Takes the userPin and compares to the capsulePin. Returns true if the entered code is correct
+     * @param s
+     * @return
+     */
     public boolean checkValidity(String s) {
         return s.equals(getCurrentCode());
     }
 
+    /**
+     * Gets the "Pin" from the JSON got in the GET request. Returns it.
+     * @return
+     */
     public String getCurrentCode(){
         try {
             URL url = new URL("https://platania.info:3000/api/Capsules/2/bookings?access_token=GN0tME3nUBa6auETCDju80cAzMSMDaDY791UafudXydp6AwwLfVjEJDDxJTjHEg3");
@@ -29,7 +44,6 @@ public class CodeChecker {
                 throw new RuntimeException("Failed : HTTP error code : "
                         + conn.getResponseCode());
             }
-
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         (conn.getInputStream())));

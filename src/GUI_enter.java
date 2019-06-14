@@ -1,3 +1,5 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,6 +10,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 // 1024x600 px screen
@@ -73,9 +80,16 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                 onOkayMsg.setText("Verifying ...");
                 onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
                 if (codeChecker.checkValidity(s)){
-                    //TODO go to ok screen and open the door
-                    stageController.goTo("valid");
-                    CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);
+                    onOkayMsg.setText("Opening door ...");
+                    onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
+
+
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), ev -> {
+                        CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);
+                        stageController.checkState();
+                    }));
+                    timeline.play();
+
                 } else {
                     onOkayMsg.setText("Invalid code, please retry!");
                     onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));}

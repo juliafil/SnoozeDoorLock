@@ -1,3 +1,8 @@
+/**
+ * @author Julia
+ * bitte Kommentar schreiben
+ */
+
 class CapsuleStateContainer {
     // singleton
 
@@ -6,6 +11,10 @@ class CapsuleStateContainer {
 
     private CapsuleStateContainer() { state = CapsuleState.FREE; }
 
+    /**
+     *  bitte Kommentar schreiben
+     * @return
+     */
     static CapsuleStateContainer getInstance () {
         if (CapsuleStateContainer.instance == null) {
             CapsuleStateContainer.instance = new CapsuleStateContainer();
