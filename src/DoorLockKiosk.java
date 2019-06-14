@@ -50,8 +50,8 @@ public class DoorLockKiosk extends Application implements StageController, confi
         new Thread(testHandler).start();
         testHandler.messageProperty().addListener((obs, oldMsg, newMsg) -> {
             if (newMsg.equals("doorOpen")) {
-                System.out.println("change #state to Open");
-                CapsuleStateContainer.getInstance().setState(CapsuleState.DOOR_OPEN);
+                System.out.println("change state to Open");
+                goTo("doorOpen");
             }
         });
 
