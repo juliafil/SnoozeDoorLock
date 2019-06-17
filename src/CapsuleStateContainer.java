@@ -1,6 +1,9 @@
 /**
  * @author Julia
- * bitte Kommentar schreiben
+ * This is a global singleton object that holds the state the capsule is currently in.
+ * values of state are described in the CapsuleState enum:
+ * @see CapsuleState
+ * use like: CapsuleStateContainer.getInstance().getState().getString(), e.g. in gotTo(...)
  */
 
 class CapsuleStateContainer {

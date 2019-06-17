@@ -1,6 +1,9 @@
 /**
  * @author Julia
- * bitte kommentar schreiben
+ * this enumeration provides all valid capsule states and corresponding strings
+ * getString() returns the string of the current state
+ * used in:
+ * @see CapsuleStateContainer
  */
 
 

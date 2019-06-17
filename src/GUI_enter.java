@@ -58,8 +58,8 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         Button key8 = new Button("8");
         Button key9 = new Button("9");
         Button key0 = new Button("0");
-        Button key_ok = new Button("ok");
-        Button key_delete = new Button("x");
+        Button key_ok = new Button("");
+        Button key_delete = new Button("");
 
         Button[] keys = new Button[]{ key1, key2, key3, key4, key5, key6, key7, key8, key9, key_delete, key0, key_ok };
 
@@ -72,6 +72,8 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         for ( Button k : keys ) {
             k.getStyleClass().addAll("keypad_button");
         }
+        key_ok.getStyleClass().addAll("button_no_bg", "btn_ok");
+        key_delete.getStyleClass().addAll("button_no_bg", "btn_delete");
 
         // key functions
         key_ok.setOnAction( e -> {
@@ -97,11 +99,11 @@ public class GUI_enter extends Stage implements StageControllerPassive {
 
                 } else {
                     onOkayMsg.setText("Invalid code, please retry!");
-                    onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));}
+                    onOkayMsg.setTextFill(Color.valueOf("#f19da3"));}
 
             } else {
                 onOkayMsg.setText("A "+codeLength+"-digit code is required.");
-                onOkayMsg.setTextFill(Color.valueOf("#ffc8cd"));
+                onOkayMsg.setTextFill(Color.valueOf("#f19da3"));
             }
         });
         key_delete.setOnAction( e -> {

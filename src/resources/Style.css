@@ -1,5 +1,5 @@
-/*
-    @author Julia Filzinger
+/**
+  @author Julia
  */
 
 @font-face {
@@ -26,10 +26,16 @@
     */
 
     -fx-palegreen: #d6ffb2;
-    -fx-palered: #ffc8cd;
+    -fx-palered: #f19da3; /*#ffc8cd*/
     -fx-error: #ff2c50;
     -fx-error2: #ff7e52;
     -fx-correct: #5cf369;
+    -fx-paleblue: #bfe5f5;
+    -fx-lightblue: #88def6;
+
+    -fx-green-gradient: linear-gradient(to bottom right, reflect, #10d521, #5cf369, #10d521);
+    -fx-red-gradient: linear-gradient(to bottom right, reflect, #ff2c50, #ff4d6a, #ff2c50);
+    -fx-orange-gradient: linear-gradient(to bottom right, reflect, #ff6633, #ff7e52, #ff6633);
 
 }
 
@@ -49,6 +55,30 @@
     -fx-background-radius: 0;
 }
 
+.button_no_bg {
+    -fx-background-color: transparent;
+}
+
+.btn_ok {
+    -fx-background-image: url("check.png");
+    -fx-background-size: 90%;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-padding-left: 20px;
+    -fx-padding-right: 20px;
+    -fx-pref-width: 40px;
+}
+
+.btn_delete {
+    -fx-background-image: url("x.png");
+    -fx-background-size: 90%;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-padding-left: 20px;
+    -fx-padding-right: 20px;
+    -fx-pref-width: 40px;
+}
+
 .keypad_button {
     -fx-background-radius: 5px;
 }
@@ -66,7 +96,6 @@
     -fx-background-size: contain;
 }
 .bg_brand{
-    /*-fx-background-color: -fx-brand-bg;*/
     -fx-background-color: -fx-brand-gradient;
 }
 .bg_brand_humble{
@@ -74,16 +103,33 @@
 }
 
 .bg_brand_light{
-    /*-fx-background-color: -fx-brand-light;*/
     -fx-background-color: -fx-brand-light-gradient;
 }
 
+.bg_green_gradient{
+    -fx-background-color: -fx-green-gradient;
+}
+
+.bg_lightblue {
+    -fx-background-color: -fx-lightblue;
+}
+
+.bg_white {
+    -fx-background-color: #fff;
+}
+
+.bg_paleblue {
+    -fx-background-color: #bfe5f5;
+}
+
 .error2_BG {
-    -fx-background-color: -fx-error2;
+    /*-fx-background-color: -fx-error2;*/
+    -fx-background-color: -fx-orange-gradient;
 }
 
 .error1_BG {
-    -fx-background-color: -fx-error;
+   /* -fx-background-color: -fx-error;*/
+    -fx-background-color: -fx-red-gradient;
 }
 .welcomeBar {
     -fx-background-color: #ffffff;
