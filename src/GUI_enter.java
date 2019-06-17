@@ -82,7 +82,12 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                 if (codeChecker.checkValidity(s)){
                     onOkayMsg.setText("Opening door ...");
                     onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
-
+                    /**
+                     * next two lines from @author Ertel
+                     * starts Script to open the Door Lock
+                     */
+                    ScriptHandler openHandler = new ScriptHandler(config.openScriptPath, config.pythonPath);
+                    new Thread(openHandler).start();
 
                     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), ev -> {
                         CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);

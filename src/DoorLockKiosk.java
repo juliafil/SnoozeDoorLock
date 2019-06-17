@@ -16,6 +16,7 @@ public class DoorLockKiosk extends Application implements StageController, confi
     private GUI_enter enterStage = new GUI_enter(this, languageSelected);
     private GUI_ErrorScreen errorStage = new GUI_ErrorScreen(this, languageSelected);
     private GUI_valid validStage = new GUI_valid(this, languageSelected);
+    private ScriptHandler sensorHandler;
 
     private final Stage window = new Stage();
     private Scene scene;
@@ -36,6 +37,16 @@ public class DoorLockKiosk extends Application implements StageController, confi
         window.setOnCloseRequest( e -> e.consume() );
         */
 
+        /**
+         * When the application needs to be closed the processes for the scripts have to be killed
+         * window.setOnCloseRequest(e -> {
+         *             sensorHandler.killProcess();
+         *             openHandler.killProcess();
+         *             Platform.exit();
+         *         });
+         * @author Ertel
+         */
+
         if (CapsuleStateContainer.getInstance().getState() == CapsuleState.FREE) {
             goTo("home");
         } else {
@@ -43,15 +54,20 @@ public class DoorLockKiosk extends Application implements StageController, confi
         }
 
 
-        /**Initilaise and start Task for executing Script and add a Listener to Message Property
+        /**Initilaise and start Task for executing Script and add a Listener to Message Property where the output of the script is redirected to.
+         * Changes State of the Application to go to the corresponding screen
          * @author Ertel
          */
-        ScriptHandler testHandler = new ScriptHandler(this, config.scriptPath, config.pythonPath);
-        new Thread(testHandler).start();
-        testHandler.messageProperty().addListener((obs, oldMsg, newMsg) -> {
-            if (newMsg.equals("doorOpen")) {
-                System.out.println("change state to Open");
-                goTo("doorOpen");
+        sensorHandler = new ScriptHandler(config.sensorScriptPath, config.pythonPath);
+        new Thread(sensorHandler).start();
+        sensorHandler.messageProperty().addListener((obs, oldMsg, newMsg) -> {
+            if (newMsg.equals("doorStayedOpen")) {
+                CapsuleStateContainer.getInstance().setState(CapsuleState.DOOR_OPEN);
+                this.checkState();
+            }
+            else if(newMsg.equals("doorClosed")) {
+                CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);
+                this.checkState();
             }
         });
 
