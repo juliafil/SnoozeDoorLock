@@ -57,7 +57,7 @@ public class DoorLockKiosk extends Application implements StageController, confi
          * Changes State of the Application to go to the corresponding screen
          * @author Ertel
          */
-        sensorHandler = new ScriptHandler(config.sensorScriptPath, config.pythonPath);
+        sensorHandler = new ScriptHandler(this, config.sensorScriptPath, config.pythonPath, 3000);
         new Thread(sensorHandler).start();
         sensorHandler.messageProperty().addListener((obs, oldMsg, newMsg) -> {
             if (newMsg.equals("doorStayedOpen")) {

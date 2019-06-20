@@ -100,7 +100,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                      * next two lines from @author Ertel
                      * starts Script to open the Door Lock
                      */
-                    ScriptHandler openHandler = new ScriptHandler(config.openScriptPath, config.pythonPath);
+                    ScriptHandler openHandler = new ScriptHandler(stageController,config.openScriptPath, config.pythonPath);
                     new Thread(openHandler).start();
 
                     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), ev -> {

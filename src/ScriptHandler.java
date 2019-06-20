@@ -1,5 +1,6 @@
 import javafx.concurrent.Task;
 
+
 import java.io.*;
 import java.util.Arrays;
 
@@ -17,12 +18,23 @@ public class ScriptHandler extends Task<Boolean> {
     private ProcessBuilder builder;
     private Process p;
     private boolean failed = false;
+    private StageController stgController;
+    private long delay=100;
 
-    public ScriptHandler(String scriptPath, String pythonPath) {
+
+    public ScriptHandler(StageController stgController, String scriptPath, String pythonPath) {
         this.script = scriptPath;
         this.python = pythonPath;
+        this.stgController = stgController;
 
     }
+    public ScriptHandler(StageController stgController, String scriptPath, String pythonPath, long delay) {
+        this.script = scriptPath;
+        this.python = pythonPath;
+        this.stgController = stgController;
+        this.delay = delay;
+    }
+
 
     public void killProcess() {
         if (p.isAlive()) {
@@ -33,6 +45,11 @@ public class ScriptHandler extends Task<Boolean> {
 
     @Override
     protected Boolean call() {
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         builder = new ProcessBuilder(Arrays.asList(python, script));
 
 
@@ -40,8 +57,8 @@ public class ScriptHandler extends Task<Boolean> {
             p = builder.start(); // start process (script)
 
         } catch (IOException e) {
-            System.out.println("Error when trying to execute Script");
-            //Error Screen einblenden?
+            CapsuleStateContainer.getInstance().setState(CapsuleState.ERROR);
+            stgController.checkState();
         }
 
         BufferedReader bferr = new BufferedReader(new InputStreamReader(p.getErrorStream()));
@@ -50,19 +67,22 @@ public class ScriptHandler extends Task<Boolean> {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                CapsuleStateContainer.getInstance().setState(CapsuleState.ERROR);
+                stgController.checkState();
             }
             if (bferr.ready()) {
                 err = bferr.readLine();
                 if (err.contains("Errno")) {
-                    System.out.println("Script '" + script + "' could not be executed!");
+                    System.out.println("ERR");
+                    CapsuleStateContainer.getInstance().setState(CapsuleState.ERROR);
+                    stgController.checkState();
                     failed = true;
 
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error while reading the output of the Script");
-            //Error Screen einblenden?
+            CapsuleStateContainer.getInstance().setState(CapsuleState.ERROR);
+            stgController.checkState();
         }
 
         //Read every Line of the output from the process and call updateMessage() to invoke eventListener
@@ -78,8 +98,8 @@ public class ScriptHandler extends Task<Boolean> {
 
                 }
             } catch (IOException e) {
-                System.out.println("Error while reading the output of the Script");
-                //Error Screen einblenden?
+                CapsuleStateContainer.getInstance().setState(CapsuleState.ERROR);
+                stgController.checkState();
 
             }
             return false;
