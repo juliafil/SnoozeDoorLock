@@ -41,10 +41,8 @@ public class GUI_enter extends Stage implements StageControllerPassive {
     }
 
     private VBox makeKeyboard( TextField textField ) {
-        //check Internet
-        if (!InternetCheck.isInternetAvailable()){
-            stageController.goTo("error");
-        }
+
+
 
 
         // make keyboard
@@ -81,9 +79,17 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         }
         key_ok.getStyleClass().addAll("button_no_bg", "btn_ok");
         key_delete.getStyleClass().addAll("button_no_bg", "btn_delete");
+        //check Internet
+
 
         // key functions
         key_ok.setOnAction( e -> {
+            if (!InternetCheck.isInternetAvailable()){
+                System.out.println("No internet connection");
+                onOkayMsg.setText("No internet connection, please retry later!");
+                onOkayMsg.setTextFill(Color.valueOf("#f19da3"));
+                //stageController.goTo("error");
+                } else {
             String s = textField.getText();
             if( s.length() == codeLength ) {
                 onOkayMsg.setText("Verifying ...");
@@ -123,7 +129,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
             } else {
                 onOkayMsg.setText("A "+codeLength+"-digit code is required.");
                 onOkayMsg.setTextFill(Color.valueOf("#f19da3"));
-            }
+            }}
         });
         key_delete.setOnAction( e -> {
             onOkayMsg.setText("");
@@ -236,7 +242,8 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
         this.setScene(scene);
 
-        backBtn.setOnAction( e -> stageController.goHome());
+        backBtn.setOnAction( e -> stageController.goTo("home"));
+        onOkayMsg.setText("");
     }
 
     private static void addTextLimiter(final TextField tf, final int maxLength) {

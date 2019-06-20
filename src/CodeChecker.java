@@ -99,7 +99,6 @@ public class CodeChecker {
                     JSONObject result = new JSONObject(responseStrBuilder.toString().replaceAll("[\\[\\]]", ""));
                     int pin = result.getInt("Pin");
                     capsuleCode = String.valueOf(pin);
-                    System.out.println(capsuleCode);
                 }
                 conn.disconnect();
 
