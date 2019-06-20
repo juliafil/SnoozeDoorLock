@@ -26,11 +26,12 @@ public class GUI_enter extends Stage implements StageControllerPassive {
     private lang languageSelected;
 
     //TODO change back to 4, for testing the first PIN got from the website is length 3
-    private int codeLength = 3;
+    private int codeLength = 4;
 
     private Label onOkayMsg = new Label();
 
     private CodeChecker codeChecker = new CodeChecker();
+
 
     // constructor
     GUI_enter(StageController stc, lang lang){
@@ -40,6 +41,12 @@ public class GUI_enter extends Stage implements StageControllerPassive {
     }
 
     private VBox makeKeyboard( TextField textField ) {
+        //check Internet
+        if (!InternetCheck.isInternetAvailable()){
+            stageController.goTo("error");
+        }
+
+
         // make keyboard
         VBox keyboard = new VBox(20);
 
@@ -81,7 +88,12 @@ public class GUI_enter extends Stage implements StageControllerPassive {
             if( s.length() == codeLength ) {
                 onOkayMsg.setText("Verifying ...");
                 onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
-                if (codeChecker.checkValidity(s)){
+
+                /** Implementation of CodeChecker. If any questions ask @author Edouard
+                 *
+                 */
+                codeChecker.getCurrentCode();
+                if (codeChecker.capsuleCode.equals(s)){
                     onOkayMsg.setText("Opening door ...");
                     onOkayMsg.setTextFill(Color.valueOf("#d6ffb2"));
                     /**
@@ -97,7 +109,14 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                     }));
                     timeline.play();
 
-                } else {
+                } else if (codeChecker.capsuleCode.equals("No booking")){
+                    onOkayMsg.setText("No current booking for this capsule!");
+                    onOkayMsg.setTextFill(Color.valueOf("#f19da3"));
+                } else if (codeChecker.capsuleCode.equals("Login error")){
+                    stageController.goTo("error");
+                    System.out.println("Error with the LOGIN! 401 received");
+                }
+                    else {
                     onOkayMsg.setText("Invalid code, please retry!");
                     onOkayMsg.setTextFill(Color.valueOf("#f19da3"));}
 
