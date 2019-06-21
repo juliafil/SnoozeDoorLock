@@ -108,6 +108,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
         backBtn.setOnAction( e -> stageController.goHome());
 
         // scroll buttons functionality
+        scroller.setVvalue(scroller.getVmax());
         upBtn.setOnAction( e -> {
             if (scroller.getVvalue() > scroller.getVmin()) {
                 scroller.setVvalue(scroller.getVvalue() - scrollIncrement);
