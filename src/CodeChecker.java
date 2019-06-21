@@ -3,6 +3,7 @@ import org.json.JSONObject;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 
@@ -17,6 +18,7 @@ public class CodeChecker {
 
     public String capsuleCode;
     private String actualAccessToken;
+    public JSONObject currentBooking;
     //public boolean internet;
 /*
     public CodeChecker(){
@@ -24,12 +26,33 @@ public class CodeChecker {
         getCurrentCode();
     }*/
 
-private String login(){
+public void sendCurrentBookingInfo(JSONObject currentBooking){
+    try {
+        URL rasp = new URL("http://test.com:80");
+        HttpURLConnection conn = (HttpsURLConnection) rasp.openConnection();
+        doPost(currentBooking, conn);
+
+    } catch (IOException e){
+        e.printStackTrace();
+    }
+}
+
+    private void doPost(JSONObject currentBooking, HttpURLConnection conn) throws IOException {
+        conn.setRequestMethod("POST");
+        conn.addRequestProperty("content-type","application/json");
+        OutputStream os = conn.getOutputStream();
+        OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+        String params = currentBooking.toString();
+        osw.write(params);
+        osw.flush();
+        osw.close();
+        os.close();
+        conn.connect();
+    }
+
+    private String login(){
     try{
 
-        //TODO check with Fabian for authentication when already connected. For now it throws an error because already authenticated
-        //TODO goal here is to authenticate each time in order to get the actual AccessToken
-        //DAS HIER IST MIT DEM POST DINGS
         URL auth = new URL("https://platania.info:3000/api/SnoozeUsers/login");
 
         JSONObject post = new JSONObject();
@@ -40,18 +63,8 @@ private String login(){
         SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
         conn1.setSSLSocketFactory(socketFactory);
         conn1.setDoOutput(true);
-        conn1.setRequestMethod("POST");
-        conn1.addRequestProperty("content-type","application/json");
-        OutputStream os = conn1.getOutputStream();
-        OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-        String params = post.toString();
-        osw.write(params);
-        osw.flush();
-        osw.close();
-        os.close();
-        conn1.connect();
+        doPost(post, conn1);
 
-        String result3;
         BufferedInputStream bis = new BufferedInputStream(conn1.getInputStream());
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         int result2 = bis.read();
@@ -59,9 +72,6 @@ private String login(){
             buf.write((byte) result2);
             result2 = bis.read();
         }
-        //result3 = buf.toString();
-
-        //System.out.println(buf.toString());
 
         JSONObject login = new JSONObject(buf.toString().replaceAll("[\\[\\]]", ""));
         actualAccessToken = login.getString("id");
@@ -111,8 +121,8 @@ private String login(){
                         responseStrBuilder.append(line);
                     }
 
-                    JSONObject result = new JSONObject(responseStrBuilder.toString().replaceAll("[\\[\\]]", ""));
-                    int pin = result.getInt("Pin");
+                    currentBooking = new JSONObject(responseStrBuilder.toString().replaceAll("[\\[\\]]", ""));
+                    int pin = currentBooking.getInt("Pin");
                     capsuleCode = String.valueOf(pin);
                 }
                 conn.disconnect();

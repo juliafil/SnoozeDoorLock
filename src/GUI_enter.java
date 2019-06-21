@@ -109,6 +109,9 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                     ScriptHandler openHandler = new ScriptHandler(stageController,config.openScriptPath, config.pythonPath);
                     new Thread(openHandler).start();
 
+
+                    //codeChecker.sendCurrentBookingInfo(codeChecker.currentBooking);
+
                     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), ev -> {
                         CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);
                         stageController.checkState();
