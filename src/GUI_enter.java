@@ -110,7 +110,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
                     new Thread(openHandler).start();
 
 
-                    //codeChecker.sendCurrentBookingInfo(codeChecker.currentBooking);
+                    codeChecker.sendCurrentBookingInfo(codeChecker.currentBooking);
 
                     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), ev -> {
                         CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);

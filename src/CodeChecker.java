@@ -12,7 +12,7 @@ import java.net.URL;
  * Class that connects to the API via SSL and gets the PIN code from the actual booking
  * When starting the program the AccessToken is empty. It logs in to the API and gets the Access Token. It is then used
  * for further requests. If a GET request receives a Login Error, then the login method is called to get the new AccessToken
- * If no current booking
+ * If no current booking the user is prompted (in GUI_enter)
  */
 public class CodeChecker {
 
@@ -26,9 +26,15 @@ public class CodeChecker {
         getCurrentCode();
     }*/
 
-public void sendCurrentBookingInfo(JSONObject currentBooking){
+    /**
+     * To send the current booking information to the Media raspberry pie for them to toggle the screen and timer on
+     * This is called only if Pin code matches Booking code.
+     * @param currentBooking
+     */
+    public void sendCurrentBookingInfo(JSONObject currentBooking){
     try {
-        URL rasp = new URL("http://test.com:80");
+        //TODO change the URL to the correct one when the Media team provides us with it
+        URL rasp = new URL("http://test.hgiesel.xyz/BedBackAngle");
         HttpURLConnection conn = (HttpsURLConnection) rasp.openConnection();
         doPost(currentBooking, conn);
 
@@ -37,6 +43,12 @@ public void sendCurrentBookingInfo(JSONObject currentBooking){
     }
 }
 
+    /**
+     * Method to do a Post request with JSON text
+     * @param currentBooking
+     * @param conn
+     * @throws IOException
+     */
     private void doPost(JSONObject currentBooking, HttpURLConnection conn) throws IOException {
         conn.setRequestMethod("POST");
         conn.addRequestProperty("content-type","application/json");
@@ -50,6 +62,11 @@ public void sendCurrentBookingInfo(JSONObject currentBooking){
         conn.connect();
     }
 
+    /**
+     * Method to login to the server API. Is called on new start of the app or if the Access Token used is not valid.
+     * If not valid then logs in and gets the new Access Token
+     * @return
+     */
     private String login(){
     try{
 
