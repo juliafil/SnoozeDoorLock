@@ -73,8 +73,8 @@ public class CodeChecker {
         URL auth = new URL("https://platania.info:3000/api/SnoozeUsers/login");
 
         JSONObject post = new JSONObject();
-        post.put("username","Capsule1User");
-        post.put("password","0000");
+        post.put("username","Edouard");
+        post.put("password","1234");
 
         HttpsURLConnection conn1 = (HttpsURLConnection) auth.openConnection();
         SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
