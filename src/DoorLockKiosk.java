@@ -31,11 +31,11 @@ public class DoorLockKiosk extends Application implements StageController, confi
     @Override
     public void start(Stage primaryStage) {
         // make fullscreen and unclosable! TODO uncomment!
-        /*
+
         window.setFullScreen(true);
-        window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+//        window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         window.setOnCloseRequest( e -> e.consume() );
-        */
+
 
         /**
          * When the application needs to be closed the processes for the scripts have to be killed

@@ -60,7 +60,10 @@ public class GUI_inUse extends Stage implements StageControllerPassive {
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
         this.setScene(scene);
 
+        // info bar click
         infoBar.setOnMouseClicked( e -> stageController.goTo("info") );
+        // info bar touch
+        /*infoBar.setOnTouchPressed( e -> stageController.goTo("info") );*/
     }
 
 

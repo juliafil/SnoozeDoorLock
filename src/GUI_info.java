@@ -64,8 +64,8 @@ public class GUI_info extends Stage implements StageControllerPassive {
         // make Buttons squares
         Button[] btns = {backBtn, downBtn, upBtn};
         for( Button b : btns ){
-            b.setPrefHeight(50);
-            b.setPrefWidth(50);
+            b.setPrefHeight(80);
+            b.setPrefWidth(80);
         }
         upBtn.getStyleClass().addAll("up_button");
         downBtn.getStyleClass().addAll("down_button");
@@ -105,9 +105,12 @@ public class GUI_info extends Stage implements StageControllerPassive {
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
         this.setScene(scene);
 
+        // back btn touch
+        //backBtn.setOnTouchPressed( e -> stageController.goHome());
+        // back btn click
         backBtn.setOnAction( e -> stageController.goHome());
 
-        // scroll buttons functionality
+        // scroll buttons functionality click
         scroller.setVvalue(scroller.getVmax());
         upBtn.setOnAction( e -> {
             if (scroller.getVvalue() > scroller.getVmin()) {
@@ -120,6 +123,21 @@ public class GUI_info extends Stage implements StageControllerPassive {
                 scroller.setVvalue(scroller.getVvalue() + scrollIncrement);
             }
         });
+
+        // scroll buttons functionality touch
+        /*scroller.setVvalue(scroller.getVmax());
+        upBtn.setOnTouchPressed( e -> {
+            if (scroller.getVvalue() > scroller.getVmin()) {
+                scroller.setVvalue(scroller.getVvalue() - scrollIncrement);
+            }
+        });
+
+        downBtn.setOnTouchPressed( e -> {
+            if (scroller.getVvalue() < scroller.getVmax()) {
+                scroller.setVvalue(scroller.getVvalue() + scrollIncrement);
+            }
+        });
+        */
     }
 
     @Override

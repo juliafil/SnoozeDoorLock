@@ -74,8 +74,12 @@ public class GUI_start extends Stage implements StageControllerPassive {
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
         this.setScene(scene);
 
-        infoSide.setOnMouseClicked( e -> stageController.goTo("info") );
+        // navigation touch
+        /*infoSide.setOnTouchPressed( e -> stageController.goTo("info") );
+        enterSide.setOnTouchPressed( e -> stageController.goTo("enter") );*/
 
+        // navigation click
+        infoSide.setOnMouseClicked( e -> stageController.goTo("info") );
         enterSide.setOnMouseClicked( e -> stageController.goTo("enter") );
     }
 

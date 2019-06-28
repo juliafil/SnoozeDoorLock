@@ -42,9 +42,6 @@ public class GUI_enter extends Stage implements StageControllerPassive {
 
     private VBox makeKeyboard( TextField textField ) {
 
-
-
-
         // make keyboard
         VBox keyboard = new VBox(20);
 
@@ -76,11 +73,12 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         keyboard.getChildren().addAll(kb_row1, kb_row2, kb_row3, kb_row4);
         for ( Button k : keys ) {
             k.getStyleClass().addAll("keypad_button");
+            k.setPrefHeight(60);
+            k.setMinWidth(60);
         }
         key_ok.getStyleClass().addAll("button_no_bg", "btn_ok");
         key_delete.getStyleClass().addAll("button_no_bg", "btn_delete");
         //check Internet
-
 
         // key functions
         key_ok.setOnAction( e -> {
@@ -200,7 +198,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         VBox controls_back = new VBox(0);
         Button backBtn = new Button();
         VBox refine = new VBox();
-        refine.setPrefWidth(50);
+        //refine.setPrefWidth(200);
 
         Insets paddingStd = new Insets(20,20,20,20);
 
@@ -215,7 +213,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         VBox keyboard = makeKeyboard(textField);
         keyboardWrapper.getChildren().addAll(keyboard);
 
-        VBox inputWrapper = new VBox(40);
+        VBox inputWrapper = new VBox(20);
         inputWrapper.getChildren().addAll(textField, keyboardWrapper);
         inputWrapper.maxWidthProperty().bind( keyboardWrapper.widthProperty() );
 
@@ -228,11 +226,12 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         onOkayMsg.setAlignment(Pos.CENTER);
         onOkayMsg.getStyleClass().addAll("h5");
 
-        keyboardWrapper.setMaxWidth(Double.MAX_VALUE);
+        keyboard.setPrefWidth(Double.MAX_VALUE);
+        keyboardWrapper.setPrefWidth(Double.MAX_VALUE);
         keyboardWrapper.setAlignment(Pos.CENTER);
 
-        backBtn.setPrefWidth(50);
-        backBtn.setPrefHeight(50);
+        backBtn.setPrefWidth(80);
+        backBtn.setPrefHeight(80);
         backBtn.getStyleClass().addAll("back_button");
         controls_back.getChildren().addAll(backBtn);
 
@@ -245,6 +244,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
         this.setScene(scene);
 
+        //backBtn.setOnTouchPressed( e -> stageController.goTo("home"));
         backBtn.setOnAction( e -> stageController.goTo("home"));
         onOkayMsg.setText("");
     }

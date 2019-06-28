@@ -56,7 +56,7 @@
 }
 
 .button_no_bg {
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
 }
 
 .btn_ok {
@@ -81,6 +81,7 @@
 
 .keypad_button {
     -fx-background-radius: 5px;
+    -fx-font-size: 30px;
 }
 
 .up_button {
