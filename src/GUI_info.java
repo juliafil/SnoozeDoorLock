@@ -1,4 +1,3 @@
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +10,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 // 1024x600 px screen
@@ -21,6 +19,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
     private StageController stageController;
     private lang languageSelected;
     private Scene scene;
+    private BorderPane layout;
 
     private final int scrollIncrement = 10;
 
@@ -33,7 +32,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
 
     private void makeLayout(){
         // make components
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
         VBox controls_back = new VBox(0);
         VBox controls_scroll = new VBox(5);
         VBox main = new VBox(20);
@@ -108,10 +107,10 @@ public class GUI_info extends Stage implements StageControllerPassive {
         // back btn touch
         //backBtn.setOnTouchPressed( e -> stageController.goHome());
         // back btn click
-        backBtn.setOnAction( e -> stageController.goHome());
+        backBtn.setOnAction( e -> stageController.goBack());
 
         // scroll buttons functionality click
-        scroller.setVvalue(scroller.getVmax());
+        scroller.setVvalue(scroller.getVmin());
         upBtn.setOnAction( e -> {
             if (scroller.getVvalue() > scroller.getVmin()) {
                 scroller.setVvalue(scroller.getVvalue() - scrollIncrement);

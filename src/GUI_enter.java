@@ -12,20 +12,16 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
 
 // 1024x600 px screen
 
 public class GUI_enter extends Stage implements StageControllerPassive {
 
     private Scene scene;
+    private BorderPane layout;
     private StageController stageController;
     private lang languageSelected;
 
-    //TODO change back to 4, for testing the first PIN got from the website is length 3
     private int codeLength = 4;
 
     private Label onOkayMsg = new Label();
@@ -193,12 +189,12 @@ public class GUI_enter extends Stage implements StageControllerPassive {
 
     private void makeLayout(){
         // make components
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
         VBox main = new VBox(20);
         VBox controls_back = new VBox(0);
         Button backBtn = new Button();
-        VBox refine = new VBox();
-        //refine.setPrefWidth(200);
+        VBox placeholderRight = new VBox();
+        placeholderRight.setPrefWidth(80);
 
         Insets paddingStd = new Insets(20,20,20,20);
 
@@ -219,7 +215,8 @@ public class GUI_enter extends Stage implements StageControllerPassive {
 
         main.getChildren().addAll(msg, onOkayMsg, inputWrapper);
         main.setPadding(paddingStd);
-        main.setAlignment(Pos.CENTER);
+        main.setAlignment(Pos.TOP_CENTER);
+        main.setPadding(new Insets(25, 20, 20, 20));
 
         msg.setAlignment(Pos.CENTER);
         msg.getStyleClass().addAll("h5");
@@ -237,7 +234,7 @@ public class GUI_enter extends Stage implements StageControllerPassive {
 
         layout.setCenter(main);
         layout.setLeft(controls_back);
-        layout.setRight(refine);
+        layout.setRight(placeholderRight);
         layout.getStyleClass().addAll("bg_brand");
 
         scene = new Scene(layout);
@@ -262,4 +259,5 @@ public class GUI_enter extends Stage implements StageControllerPassive {
     public Scene getMyScene() {
         return scene;
     }
+
 }

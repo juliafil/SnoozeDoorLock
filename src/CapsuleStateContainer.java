@@ -15,8 +15,9 @@ class CapsuleStateContainer {
     private CapsuleStateContainer() { state = CapsuleState.FREE; }
 
     /**
-     *  bitte Kommentar schreiben
-     * @return
+     *  getInstance method as in the Singleton pattern. Guarantees that there is only one instance of this class,
+     *  by either returning an already created instance or making a new one.
+     * @return the only instance of CapsuleStateContainer
      */
     static CapsuleStateContainer getInstance () {
         if (CapsuleStateContainer.instance == null) {
@@ -29,6 +30,5 @@ class CapsuleStateContainer {
 
     public void setState(CapsuleState newState) {
         state = newState;
-
     }
 }

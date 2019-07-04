@@ -1,8 +1,11 @@
 import javafx.application.Platform;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.application.Application;
+import javafx.stage.StageStyle;
 
 
 public class DoorLockKiosk extends Application implements StageController, config {
@@ -21,6 +24,8 @@ public class DoorLockKiosk extends Application implements StageController, confi
     private final Stage window = new Stage();
     private Scene scene;
 
+    private static String lastScene;
+
 
     // TODO react to changed language. Use: overrideGUIInstances(languageSelected);
 
@@ -30,10 +35,13 @@ public class DoorLockKiosk extends Application implements StageController, confi
 
     @Override
     public void start(Stage primaryStage) {
-        // make fullscreen and unclosable! TODO uncomment!
 
-        window.setFullScreen(true);
-//        window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        window.setTitle("DoorLockKiosk");
+        setWindowSize(window);
+
+        // make fullscreen and unclosable! TODO uncomment!
+        //window.setFullScreen(true);
+        //window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         window.setOnCloseRequest( e -> e.consume() );
 
 
@@ -47,11 +55,15 @@ public class DoorLockKiosk extends Application implements StageController, confi
          * @author Ertel
          */
 
+        /*
+         * This is done on starting the app: load scene "home" and then show the window.
+         */
+        lastScene = "home";
         goHome();
         // comment and use goto() instead for testing any screen:
         // "inUse", "info", "home", "enter", "doorOpen", "valid", anything else shows the error screen
         //goTo("inUse");
-
+        window.show();
 
         /**Initilaise and start Task for executing Script and add a Listener to Message Property where the output of the script is redirected to.
          * Changes State of the Application to go to the corresponding screen
@@ -87,12 +99,20 @@ public class DoorLockKiosk extends Application implements StageController, confi
      */
     @Override
     public void goHome() {
-        if (CapsuleStateContainer.getInstance().getState() == CapsuleState.FREE) {
+        if (CapsuleStateContainer.getInstance().getState().equals(CapsuleState.FREE)) {
+            System.out.println("CapsuleState: " + CapsuleStateContainer.getInstance().getState());
             goTo("home");
         } else {
-            goTo(CapsuleStateContainer.getInstance().getState().getString());
+            String target = CapsuleStateContainer.getInstance().getState().getString();
+            goTo(target);
+            System.out.println("Target: " + target);
+            System.out.println("CapsuleState: " + CapsuleStateContainer.getInstance().getState());
         }
-        //goTo("home");
+    }
+
+    @Override
+    public void goBack(){
+        goTo(lastScene);
     }
 
     @Override
@@ -130,16 +150,23 @@ public class DoorLockKiosk extends Application implements StageController, confi
                 break;
 
         }
-        window.setTitle("DoorLockKiosk");
-        setWindowSize(window);
+
         window.setScene(scene);
-        window.show();
+        window.setMaximized(true);
+       /* window.setFullScreen(false);
+        window.setFullScreen(true);*/
     }
 
     private void setWindowSize(Stage window) {
-        window.setWidth(1024);
-        window.setHeight(600);
+        int width = (int) Screen.getPrimary().getBounds().getWidth();
+        int height = (int) Screen.getPrimary().getBounds().getHeight();
+        window.setWidth(width);
+        window.setHeight(height);
 
+        window.initStyle(StageStyle.UNDECORATED);
+
+        //window.setMaximized(true);
+        //window.setFullScreen(true);
     }
 
     /**

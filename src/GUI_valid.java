@@ -7,15 +7,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.util.concurrent.TimeUnit;
-
 
 // 1024x600 px screen
 
 public class GUI_valid extends Stage implements StageControllerPassive{
 
-
         private Scene scene;
+        private BorderPane layout;
         private StageController stageController;
         private lang languageSelected;
 
@@ -32,7 +30,7 @@ public class GUI_valid extends Stage implements StageControllerPassive{
         }
 
         private void makeLayout(){
-            BorderPane layout = new BorderPane();
+            layout = new BorderPane();
             VBox main = new VBox(20);
             Insets paddingStd = new Insets(20,20,20,20);
 

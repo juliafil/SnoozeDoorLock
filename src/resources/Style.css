@@ -56,7 +56,7 @@
 }
 
 .button_no_bg {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: rgba(255, 255, 255, 0.01);
 }
 
 .btn_ok {
@@ -141,7 +141,12 @@
     -fx-background-color: transparent;
 }
 .text-field{
-    -fx-text-fill: -fx-brand-txt;
+    -fx-text-fill: white;
+    -fx-font-size: 36px;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-border-color: rgba(255, 255, 255, 0.4);
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
 }
 
 
@@ -162,15 +167,18 @@
     -fx-font-size: 50px;
 }
 .h2 {
-    -fx-font-size: 40px;
+    /*-fx-font-size: 40px;*/
+    -fx-font-size: 44px;
 }
 .h3 {
-    -fx-font-size: 30px;
+    -fx-font-size: 40px;
 }
 .h4 {
-    -fx-font-size: 24px;
+    /*-fx-font-size: 24px;*/
+    -fx-font-size: 30px;
 }
 .h5 {
-    -fx-font-size: 22px;
+    /*-fx-font-size: 22px;*/
+    -fx-font-size: 30px;
 }
 

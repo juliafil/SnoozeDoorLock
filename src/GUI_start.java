@@ -14,6 +14,7 @@ public class GUI_start extends Stage implements StageControllerPassive {
     private StageController stageController;
     private Scene scene;
     private lang languageSelected;
+    private BorderPane layout;
 
 
     //TODO put the strings as resource for translation later
@@ -32,7 +33,7 @@ public class GUI_start extends Stage implements StageControllerPassive {
     }
 
     private void makeLayout(){
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
         VBox infoSide = new VBox(20);
         VBox enterSide = new VBox(20);
         HBox welcomeBar = new HBox(0);
@@ -72,6 +73,7 @@ public class GUI_start extends Stage implements StageControllerPassive {
 
         scene = new Scene(layout);
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
+        scene.setRoot(layout);
         this.setScene(scene);
 
         // navigation touch
@@ -85,4 +87,5 @@ public class GUI_start extends Stage implements StageControllerPassive {
 
     @Override
     public Scene getMyScene() {return scene;}
+
 }

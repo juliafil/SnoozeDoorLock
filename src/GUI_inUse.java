@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class GUI_inUse extends Stage implements StageControllerPassive {
 
     private Scene scene;
+    private BorderPane layout;
     private StageController stageController;
     private lang languageSelected;
 
@@ -29,7 +30,7 @@ public class GUI_inUse extends Stage implements StageControllerPassive {
     }
 
     private void makeLayout(){
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
         VBox main = new VBox(20);
         HBox infoBar = new HBox(10);
         Insets paddingStd = new Insets(20,20,20,20);
@@ -71,4 +72,5 @@ public class GUI_inUse extends Stage implements StageControllerPassive {
     public Scene getMyScene() {
         return scene;
     }
+
 }

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class GUI_doorOpen extends Stage implements StageControllerPassive {
 
     private Scene scene;
+    private BorderPane layout;
     private StageController stageController;
     lang languageSelected;
 
@@ -25,7 +26,7 @@ public class GUI_doorOpen extends Stage implements StageControllerPassive {
     }
 
     private void makeLayout(){
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
         VBox main = new VBox(20);
         Insets paddingStd = new Insets(20,20,20,20);
 
@@ -41,12 +42,10 @@ public class GUI_doorOpen extends Stage implements StageControllerPassive {
 
         scene = new Scene(layout);
         scene.getStylesheets().add(getClass().getResource("resources/Style.css").toString());
+        this.setScene(scene);
     }
 
     @Override
     public Scene getMyScene() {return scene;}
-
-
-
 
 }
