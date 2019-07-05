@@ -242,8 +242,11 @@ public class GUI_enter extends Stage implements StageControllerPassive {
         this.setScene(scene);
 
         //backBtn.setOnTouchPressed( e -> stageController.goTo("home"));
-        backBtn.setOnAction( e -> stageController.goTo("home"));
-        onOkayMsg.setText("");
+        backBtn.setOnAction(e -> {
+            stageController.goTo("home");
+            onOkayMsg.setText("");
+            textField.setText("");
+        });
     }
 
     private static void addTextLimiter(final TextField tf, final int maxLength) {
