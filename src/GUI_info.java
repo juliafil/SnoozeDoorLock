@@ -1,3 +1,4 @@
+import com.sun.prism.paint.Color;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 // 1024x600 px screen
@@ -85,6 +87,8 @@ public class GUI_info extends Stage implements StageControllerPassive {
         scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroller.getStyleClass().addAll("scroller");
 
+        scrollableContent.setPrefHeight(Screen.getPrimary().getBounds().getHeight());
+
         txt.wrappingWidthProperty().bind(scroller.widthProperty());
         txt.getStyleClass().addAll("h4", "leftAligned");
         txt.setLineSpacing(2.5);
@@ -110,7 +114,7 @@ public class GUI_info extends Stage implements StageControllerPassive {
         backBtn.setOnAction( e -> stageController.goBack());
 
         // scroll buttons functionality click
-        scroller.setVvalue(scroller.getVmin());
+        scroller.setVvalue(0);
         upBtn.setOnAction( e -> {
             if (scroller.getVvalue() > scroller.getVmin()) {
                 scroller.setVvalue(scroller.getVvalue() - scrollIncrement);
