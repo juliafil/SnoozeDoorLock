@@ -34,9 +34,30 @@ public class CodeChecker {
     public void sendCurrentBookingInfo(JSONObject currentBooking){
     try {
         //TODO change the URL to the correct one when the Media team provides us with it
-        URL rasp = new URL("http://test.hgiesel.xyz/BedBackAngle");
-        HttpURLConnection conn = (HttpsURLConnection) rasp.openConnection();
+        URL rasp = new URL("http://test.hgiesel.xyz/CurrentBooking");
+        HttpURLConnection conn = (HttpURLConnection) rasp.openConnection();
+        conn.setDoOutput(true);
+
         doPost(currentBooking, conn);
+
+        BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        int result2 = bis.read();
+        while(result2 != -1) {
+            buf.write((byte) result2);
+            result2 = bis.read();
+        }
+        if (conn.getResponseCode() == 502){
+            throw new RuntimeException("COuld not reach Media Server " + conn.getResponseCode());
+        } else {
+
+            System.out.println("sendCurrentBookingInfo to Media Rasp: " + buf.toString());
+        }
+
+
+
+
+
 
     } catch (IOException e){
         e.printStackTrace();
