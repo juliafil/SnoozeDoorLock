@@ -1,3 +1,4 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -31,6 +32,9 @@ public class CodeChecker {
      * This is called only if Pin code matches Booking code.
      * @param currentBooking
      */
+
+
+
     public void sendCurrentBookingInfo(JSONObject currentBooking){
     try {
         //TODO change the URL to the correct one when the Media team provides us with it
@@ -38,6 +42,8 @@ public class CodeChecker {
         HttpURLConnection conn = (HttpURLConnection) rasp.openConnection();
         conn.setDoOutput(true);
 
+        currentBooking.put("accessToken",actualAccessToken);
+        System.out.println(currentBooking.toString());
         doPost(currentBooking, conn);
 
         BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
@@ -53,12 +59,6 @@ public class CodeChecker {
 
             System.out.println("sendCurrentBookingInfo to Media Rasp: " + buf.toString());
         }
-
-
-
-
-
-
     } catch (IOException e){
         e.printStackTrace();
     }
