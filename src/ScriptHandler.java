@@ -20,6 +20,7 @@ public class ScriptHandler extends Task<Boolean> {
     private boolean failed = false;
     private StageController stgController;
     private long delay=100;
+    BufferedReader bfr;
 
 
     public ScriptHandler(StageController stgController, String scriptPath, String pythonPath) {
@@ -44,7 +45,7 @@ public class ScriptHandler extends Task<Boolean> {
     }
 
     @Override
-    protected Boolean call() {
+    protected Boolean call() throws InterruptedException {
         try {
             Thread.sleep(delay);
         } catch (InterruptedException e) {
@@ -72,6 +73,7 @@ public class ScriptHandler extends Task<Boolean> {
             }
             if (bferr.ready()) {
                 err = bferr.readLine();
+
                 if (err.contains("Errno")) {
                     System.out.println("ERR");
                     CapsuleStateContainer.getInstance().setState(CapsuleState.ERROR);
@@ -86,15 +88,26 @@ public class ScriptHandler extends Task<Boolean> {
         }
 
         //Read every Line of the output from the process and call updateMessage() to invoke eventListener
-        BufferedReader bfr = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        bfr = new BufferedReader(new InputStreamReader(p.getInputStream()));
         String line;
 
         if (!failed) {
             System.out.println("Script starts:");
             try {
                 while ((line = bfr.readLine()) != null) {
-                    System.out.println("Script Output: " + line);
-                    updateMessage(line);
+                    System.out.println(line);
+                    if(line.equals("Door stays open")) {
+                        updateMessage("open");
+                    }
+                    if (bfr.readLine().equals("Door is closed!!")){
+                        updateMessage("closed");
+                         }
+
+
+
+
+
+
 
                 }
             } catch (IOException e) {
@@ -108,5 +121,3 @@ public class ScriptHandler extends Task<Boolean> {
     }
 
 }
-
-
