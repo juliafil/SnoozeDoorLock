@@ -79,9 +79,10 @@ public class DoorLockKiosk extends Application implements StageController, confi
                 this.checkState();
             }
             else if(newMsg.equals("closed")) {
-                /*CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);
-                this.checkState();*/
-                this.goHome();
+                //CapsuleStateContainer.getInstance().setState(CapsuleState.IN_USE);
+                //this.checkState();
+                goTo("home");
+
             }
         });
 
